@@ -29,7 +29,10 @@ gulp.task('sass', function() {
         .pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
         .pipe(
             sass({
-                includePaths: ['node_modules/susy/sass', 'app/scss']
+                includePaths: [
+                    'node_modules/susy/sass', 
+                    'node_modules/breakpoint-sass/stylesheets'
+                    ]
                 }
             ).on('error', sass.logError)
         )

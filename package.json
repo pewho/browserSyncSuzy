@@ -9,6 +9,7 @@
   "author": "Pewho",
   "license": "MIT",
   "devDependencies": {
+    "breakpoint-sass": "^2.6.1",
     "browser-sync": "^2.2.0",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^3.1.0",

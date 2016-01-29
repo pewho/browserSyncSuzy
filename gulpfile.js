@@ -29,10 +29,9 @@ gulp.task('sass', function() {
         .pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
         .pipe(
             sass({
-                outputStyle: 'compressed',
-                includePaths: ['node_modules/susy/sass']
+                includePaths: ['node_modules/susy/sass', 'app/scss']
                 }
-            )
+            ).on('error', sass.logError)
         )
         .pipe(gulpautoprefix({
             browsers: ['last 2 versions'],

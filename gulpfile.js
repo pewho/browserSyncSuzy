@@ -2,6 +2,8 @@ var gulp        = require('gulp');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var sourcemaps  = require('gulp-sourcemaps');
+var gulpif      = require('gulp-if');
+var gulpautoprefix = require('gulp-autoprefixer');
 var reload      = browserSync.reload;
 
 var src = {
@@ -24,7 +26,7 @@ gulp.task('serve', ['sass'], function() {
 // Compile sass into CSS
 gulp.task('sass', function() {
     return gulp.src(src.scss)
-        .pipe(sourcemaps.init())
+        .pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
         .pipe(
             sass({
                 outputStyle: 'compressed',
@@ -32,7 +34,11 @@ gulp.task('sass', function() {
                 }
             )
         )
-        .pipe(sourcemaps.write('maps'))
+        .pipe(gulpautoprefix({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.write('maps')))
         .pipe(gulp.dest(src.css))
         .pipe(reload({stream: true}));
 });

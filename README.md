@@ -13,7 +13,7 @@ Installation
 ------------
 
 ```
->>>  git clone git@github.com:pewho/browserSyncSuzy.git
+>>> git clone git@github.com:pewho/browserSyncSuzy.git
 >>> cd browserSyncSuzy
 >>> npm install
 ```
@@ -29,3 +29,18 @@ Usage
 - Modify app/index.html, app/scss/app.scss
 - ...
 - Profit !
+
+Note
+----
+
+If you encounter this error when you launch the server :
+
+```
+Error: watch [PROJECT FOLDER]/app/scss/ ENOSPC
+```
+
+This is lickely a lake of space allowed for inotify on linux system. you could fix it whith this command :
+
+```
+>>> echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
